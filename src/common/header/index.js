@@ -10,8 +10,39 @@ import {
         NavSearch,
         Addition,
         Button,
-        SearchWrapper
+        SearchWrapper,
+        SearchInfo,
+        SearchInfoTitle,
+        SearchInfoSwitch,
+        SearchInfoItem,
+        SearchInfoList
 } from './style';
+
+const getListArea = (show) => {
+    if(show){
+       return (
+            <SearchInfo>
+                <SearchInfoTitle>
+                    搜索
+                    <SearchInfoSwitch>
+                        换一批
+                    </SearchInfoSwitch>
+                </SearchInfoTitle>
+                <SearchInfoList>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                </SearchInfoList>
+            </SearchInfo>
+       );
+    }else{
+        return null;
+    }
+}
 
 // 把return中的内容移动到一个函数里，把this指向删除，这样形成一个无状态组件
 const Header = (props) => {
@@ -40,8 +71,8 @@ const Header = (props) => {
                         >
                         </NavSearch>
                     </CSSTransition>
-                        <i  className = {props.focused ? 'iconfont focused' : 'iconfont'} >&#xe637;</i>
-                
+                    <i  className = {props.focused ? 'iconfont focused' : 'iconfont'} >&#xe637;</i>
+                    {getListArea(props.focused)}
                 </SearchWrapper>
 
             </Nav>
