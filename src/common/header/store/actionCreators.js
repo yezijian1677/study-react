@@ -5,5 +5,5 @@ export const searchFocus = () => ({
 });
 
 export const searchBlur = () => ({
-    type: constants.searchBlur
+    type: constants.SEARCH_BLUR
 });
