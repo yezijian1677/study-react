@@ -1,19 +1,11 @@
-const defaultState = {
-    focused: false
-};
+import { combineReducers } from 'redux';
+import { reducer as headerReducer } from '../common/header/store';
 
-//纯函数，固定输入就有固定输出
-export default ( state = defaultState, action ) => {
-    //reducer 告诉 store focued的值， 然后 store 去改变foucused的值
-    if(action.type === 'search_focus'){
-        return {
-            focused: true
-        }
-    }
-    if(action.type === 'search_blur'){
-        return {
-            focused: false
-        }
-    }
-    return state;
-}
+// 拆分reducers 把 header 的 数据放入header里的文件夹去
+// 拿到header reducer 进行整合，同时数据里需要更改为你现在的名字
+// 例如原来的时 state.focused 则需要变成 => state.header.focused
+const reducer = combineReducers({
+    header: headerReducer
+});
+
+export default reducer;

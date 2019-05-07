@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
+import * as actionCreators from './store/actionCreators';
 import {
         HeaderWrapper, 
         Logo,
@@ -60,24 +61,18 @@ const Header = (props) => {
 // 把仓库里的数据放入props映射
 const mapStateToProps = (state) => {
     return {
-        focused: state.focused
+        focused: state.header.focused
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         handleInputFoucus(){
-            const action = {
-                type: 'search_focus'
-            };
-            dispatch(action);
+            dispatch(actionCreators.searchFocus());
         },
 
         handleInputBlur(){
-            const action = {
-                type: 'search_blur'
-            };
-            dispatch(action);
+            dispatch(actionCreators.searchBlur());
         }
 
     }
