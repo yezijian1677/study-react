@@ -61,7 +61,7 @@ const Header = (props) => {
 // 把仓库里的数据放入props映射
 const mapStateToProps = (state) => {
     return {
-        focused: state.header.focused
+        focused: state.header.get('focused')
     }
 }
 
