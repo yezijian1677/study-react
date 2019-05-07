@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import { reducer as headerReducer } from '../common/header/store';
 
 // 拆分reducers 把 header 的 数据放入header里的文件夹去

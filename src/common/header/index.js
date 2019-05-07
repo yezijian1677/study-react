@@ -59,9 +59,12 @@ const Header = (props) => {
 }
 
 // 把仓库里的数据放入props映射
+// 转换成immutable对象了
 const mapStateToProps = (state) => {
     return {
-        focused: state.header.get('focused')
+        focused: state.getIn(['header', 'focused'])
+        //也可以是这个样子的，连写get可以用getIn代替
+        // focused: state.get('header').get('focused')
     }
 }
 
