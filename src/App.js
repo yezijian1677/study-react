@@ -1,7 +1,10 @@
 import React, { Component , Fragment} from 'react';
+import { Provider } from 'react-redux'
 import { GlobalStyled } from './style';
 import { GlobalStyledIcon } from './static/iconfont/iconfont';
 import Header from './common/header';
+import store from './store/index';
+
 
 class App extends Component {
   render(){
@@ -9,7 +12,10 @@ class App extends Component {
       <Fragment>
           <GlobalStyled />
           <GlobalStyledIcon />
-          <Header/>
+          {/* 把store提供给provider内部的组件 */}
+          <Provider store = {store} >
+            <Header/>
+          </Provider>
       </Fragment>
     );
   }
