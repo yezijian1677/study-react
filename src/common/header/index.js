@@ -25,24 +25,36 @@ import {
 class Header extends Component {
     getListArea(){
 
-        const { focused, list } = this.props;
+        const { focused, list, page, handleMouseEnter,
+                handleMouseLeave, mouseIn, handleChangePage, 
+                totalPage } = this.props;
+        const pageList = [];
+        const newList = list.toJS();
+        
+        if(newList.length){
+            for(let i = (page -1) * 10; i < page*10; i++){
+                pageList.push(
+                  <SearchInfoItem key = {newList[i]} >{newList[i]}</SearchInfoItem>
+                );
+              }
+        }
 
-        if(focused){
+        if(focused || mouseIn){
             return (
-                 <SearchInfo>
+                 <SearchInfo 
+                    onMouseEnter = {handleMouseEnter}
+                    onMouseLeave = {handleMouseLeave}
+                 >
                      <SearchInfoTitle>
                          搜索
-                         <SearchInfoSwitch>
+                         
+                         <SearchInfoSwitch onClick = { () => handleChangePage(page, totalPage, this.spinIcon)}>
+                            <i ref = { (icon) => {this.spinIcon = icon }} className = "iconfont spin">&#xe851;</i>
                              换一批
                          </SearchInfoSwitch>
                      </SearchInfoTitle>
                      <SearchInfoList>
-                         {
-                             list.map( (item) => {
-                                 return <SearchInfoItem key = {item} >{item}</SearchInfoItem>
-                             })
-                         }
-                         
+                         {pageList}
                      </SearchInfoList>
                  </SearchInfo>
             );
@@ -78,7 +90,7 @@ class Header extends Component {
                             >
                             </NavSearch>
                         </CSSTransition>
-                        <i  className = {focused ? 'iconfont focused' : 'iconfont'} >&#xe637;</i>
+                        <i  className = {focused ? 'iconfont focused zoom' : 'iconfont zoom'} >&#xe637;</i>
                       { this.getListArea() }
                     </SearchWrapper>
 
@@ -109,7 +121,10 @@ class Header extends Component {
 const mapStateToProps = (state) => {
     return {
         focused: state.getIn(['header', 'focused']),
-        list: state.getIn(['header', 'list'])
+        list: state.getIn(['header', 'list']),
+        page: state.getIn(['header', 'page']),
+        mouseIn: state.getIn(['header', 'mouseIn']),
+        totalPage: state.getIn(['header', 'totalPage'])
         //也可以是这个样子的，连写get可以用getIn代替
         // focused: state.get('header').get('focused')
     }
@@ -124,6 +139,30 @@ const mapDispatchToProps = (dispatch) => {
 
         handleInputBlur(){
             dispatch(actionCreators.searchBlur());
+        },
+
+        handleMouseEnter(){
+            dispatch(actionCreators.mouseEnter());
+        },
+
+        handleMouseLeave(){
+            dispatch(actionCreators.mouseLeave());
+        },
+        
+        handleChangePage(page, totalPage, spin){
+            let originAngele =  spin.style.transform.replace(/[^0-9]/ig, '');
+            if(originAngele){
+                originAngele = parseInt(originAngele, 10);
+            } else {
+                originAngele = 0;
+            }
+            spin.style.transform = 'rotate('+(originAngele+360)+'deg)';
+            if(page < totalPage){
+                dispatch(actionCreators.changePage(page+1));
+            } else {
+                dispatch(actionCreators.changePage(1));
+            }
+            
         }
 
     }

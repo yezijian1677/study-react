@@ -55,7 +55,7 @@ const SearchWrapper = styled.div`
    .slide-exit-active{
        width: 160px;
    }
-   .iconfont {
+   .zoom {
        position: absolute;
        right: 5px;
        bottom: 5px;
@@ -113,6 +113,15 @@ const SearchInfoTitle = styled.div`
 const SearchInfoSwitch = styled.span`
     float: right;
     font-size: 13px;
+    .spin{
+        margin-right: 2px;
+        transition: all .2s ease-in;
+        display: block;
+        float: left;
+        font-size: 12px;
+        transform-origin: center center;
+    }
+   
 `;
 
 const SearchInfoItem = styled.a`
