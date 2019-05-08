@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import logoPic from '../../static/logo.png'
+import styled from 'styled-components';
+import logoPic from '../../static/logo.png';
 
 const HeaderWrapper = styled.div`
     height: 58px;
@@ -100,6 +100,7 @@ const SearchInfo = styled.div`
     width: 240px;
     padding:  0 20px;
     box-shadow:  0 0 8px rgba(0, 0, 0, .2);
+    background: white;
 `;
 
 const SearchInfoTitle = styled.div`
@@ -113,6 +114,7 @@ const SearchInfoTitle = styled.div`
 const SearchInfoSwitch = styled.span`
     float: right;
     font-size: 13px;
+    cursor: pointer;
     .spin{
         margin-right: 2px;
         transition: all .2s ease-in;
