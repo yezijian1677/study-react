@@ -9,6 +9,9 @@ import List from './component/List';
 import Writer from './component/Writer'; 
 import Recommend from './component/Recommend';
 import Topic from './component/Topic';
+import axios  from 'axios';
+import { connect } from 'react-redux';
+import { dispatch } from 'rxjs/internal/observable/range';
 
 class Home extends Component {
     render(){
@@ -25,7 +28,27 @@ class Home extends Component {
                 </HomeRight>
             </HomeWrapper>
         );
+    };
+
+    componentDidMount(){
+        axios.get('/api/home.json').then( (res) => {
+            const result = res.data.data;
+            const action = {
+                type: 'change_home_data',
+                topicList: result.topicList,
+                articleList: result.articleList,
+                recommendList: result.recommendList
+            }
+            this.props.changeHomeData(action);
+
+        });
     }
 };
 
-export default Home;
+const mapDispatch = (dispatch) => ({
+    changeHomeData(action){
+       dispatch(action);
+    }
+})
+
+export default connect(null, mapDispatch)(Home);
