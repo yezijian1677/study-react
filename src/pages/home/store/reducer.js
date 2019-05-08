@@ -8,7 +8,9 @@ const defaultState = fromJS({
 
     recommendList: [],
 
-    articlePage: 1
+    articlePage: 1,
+
+    showScroll: false
 });
 
 //纯函数，固定输入就有固定输出
@@ -26,7 +28,10 @@ export default ( state = defaultState, action ) => {
             return state.merge({
                 'articleList': state.get('articleList').concat(action.list),
                 'articlePage': action.nextPage
-            })
+            });
+        case constants.CHANGE_SCROLL:
+            return state.set('showScroll', action.flag);
+            
         default:
             return state;
 
