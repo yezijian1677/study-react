@@ -6,7 +6,7 @@ const HeaderWrapper = styled.div`
     border-bottom: 1px solid #F0F0F0;
 `;
 
-const Logo = styled.a`
+const Logo = styled.div`
     height: 56px;
     top: 0;
     left: 0;

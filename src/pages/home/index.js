@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { 
     HomeWrapper,
     HomeLeft,
@@ -12,9 +12,8 @@ import Recommend from './component/Recommend';
 import Topic from './component/Topic';
 import { connect } from 'react-redux';
 import { actionCreators } from './store'
-import { stat } from 'fs';
 
-class Home extends Component {
+class Home extends PureComponent {
     handlerScrollTop(){
         window.scrollTo(0,0);
     }
@@ -42,10 +41,15 @@ class Home extends Component {
        this.props.changeHomeData();
        this.bindEvents();
     }
+    
+    componentWillMount(){
+        window.removeEventListener('scroll', this.props.changeScrollTopShow);
+    }
 
     bindEvents(){
-        window.addEventListener('scroll', this.props.changeScrollTopShow)
+        window.addEventListener('scroll', this.props.changeScrollTopShow);
     }
+    
 };
 
 const mapDispatch = (dispatch) => ({

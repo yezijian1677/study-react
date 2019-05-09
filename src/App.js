@@ -18,8 +18,8 @@ class App extends Component {
           <GlobalStyledIcon />
           {/* 把store提供给provider内部的组件 */}
           <Provider store = {store} >
-            <Header/>
             <BrowserRouter>
+            <Header/>
               <div>
                 <Route path='/' exact component = { Home }></Route>
                 <Route path='/detail' exact component = { Detail }></Route>
